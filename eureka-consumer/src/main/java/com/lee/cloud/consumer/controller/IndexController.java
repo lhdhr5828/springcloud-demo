@@ -19,6 +19,6 @@ public class IndexController {
 
     @RequestMapping(value = "/hi/{name}")
     public String index(@PathVariable String name) {
-        return service.hello(name);
+        return service.index(name);
     }
 }
