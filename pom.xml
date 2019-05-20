@@ -20,8 +20,13 @@
         <module>eureka-server-second</module>
         <module>eureka-server-third</module>
         <module>eureka-consumer</module>
-        <module>eureka-config-server</module>
+        <module>cloud-config-server</module>
+        <module>cloud-config-client</module>
         <module>eureka-producer</module>
+        <module>eureka-producer-second</module>
+        <module>cloud-hystrix-turbine-dashboard</module>
+        <module>cloud-consumer-node1</module>
+        <module>cloud-consumer-node2</module>
 
     </modules>
     <properties>
@@ -49,7 +54,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -82,23 +87,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-resources-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <delimiters>-->
-<!--                        <delimit>$</delimit>-->
-<!--                    </delimiters>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-resources-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <delimiters>-->
+            <!--                        <delimit>$</delimit>-->
+            <!--                    </delimiters>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
         <finalName>cloud-demo</finalName>
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>src/main/resources</directory>-->
-<!--                <filtering>true</filtering>-->
-<!--            </resource>-->
-<!--        </resources>-->
+        <!--        <resources>-->
+        <!--            <resource>-->
+        <!--                <directory>src/main/resources</directory>-->
+        <!--                <filtering>true</filtering>-->
+        <!--            </resource>-->
+        <!--        </resources>-->
     </build>
 
 </project>

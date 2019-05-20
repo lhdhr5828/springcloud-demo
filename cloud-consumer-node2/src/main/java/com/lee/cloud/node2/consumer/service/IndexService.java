@@ -1,4 +1,4 @@
-package com.lee.cloud.consumer.service;
+package com.lee.cloud.node2.consumer.service;
 
 
 import org.springframework.cloud.openfeign.FeignClient;

@@ -1,6 +1,7 @@
-package com.lee.cloud.consumer.service;
+package com.lee.cloud.node1.consumer.service;
 
 
+import com.lee.cloud.node1.consumer.service.HelloRemoteHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
