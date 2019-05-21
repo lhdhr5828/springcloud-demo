@@ -27,6 +27,8 @@
         <module>cloud-hystrix-turbine-dashboard</module>
         <module>cloud-consumer-node1</module>
         <module>cloud-consumer-node2</module>
+        <module>cloud-consul-producer-demo</module>
+        <module>cloud-consul-producer-demo-second</module>
 
     </modules>
     <properties>
@@ -57,9 +59,10 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-autoconfigure</artifactId>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
