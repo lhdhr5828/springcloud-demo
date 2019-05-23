@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.lee.cloud</groupId>
-    <artifactId>eureka-erver-demo</artifactId>
+    <artifactId>eureka-server-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>

@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    consul:
+      discovery:
+        service-name: service-provider
+        health-check-path: /service/health
+        health-check-interval: 15s
+#        register: false
+#        enabled: false
+      host: localhost
+      port: 8500
+  application:
+    name: spring-gateway-consul-producer
+
+server:
+  port: 8601

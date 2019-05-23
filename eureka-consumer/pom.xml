@@ -15,7 +15,6 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -24,20 +23,21 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-netflix-eureka-client</artifactId>
         </dependency>
+
 <!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-eureka</artifactId>-->
+<!--            <groupId>org.springframework.gateway</groupId>-->
+<!--            <artifactId>spring-gateway-starter-eureka</artifactId>-->
 <!--        </dependency>-->
 
         <!-- feign整合spring-->
 <!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-feign</artifactId>-->
+<!--            <groupId>org.springframework.gateway</groupId>-->
+<!--            <artifactId>spring-gateway-starter-feign</artifactId>-->
 <!--        </dependency>-->
         <!--feign依赖-->
         <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-openfeign-core</artifactId>-->
+        <!--            <groupId>org.springframework.gateway</groupId>-->
+        <!--            <artifactId>spring-gateway-openfeign-core</artifactId>-->
         <!--            <version>2.0.0.RELEASE</version>-->
         <!--        </dependency>-->
         <dependency>

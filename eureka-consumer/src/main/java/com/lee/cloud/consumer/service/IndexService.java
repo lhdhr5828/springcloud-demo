@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description:
  **/
 
-@FeignClient(name = "spring-cloud-producer", fallback = HelloRemoteHystrix.class)
+@FeignClient(name = "spring-gateway-producer", fallback = HelloRemoteHystrix.class)
 public interface IndexService {
 
     /**
