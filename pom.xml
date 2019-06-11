@@ -30,6 +30,9 @@
         <module>cloud-consul-producer-demo</module>
         <module>cloud-consul-producer-demo-second</module>
         <module>cloud-gateway-demo</module>
+        <module>cloud-gateway-eureka</module>
+        <module>boot-kafka-demo-server</module>
+        <module>boot-map-struct-demo</module>
 
     </modules>
     <properties>

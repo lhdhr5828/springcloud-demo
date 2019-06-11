@@ -1,39 +1,51 @@
 server:
   port: 9070
-#spring:
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: neo_route
-#          uri: http://www.baidu.com
-#          predicates:
-#            - Path=/aaa
-#      - id: time_route
-#        uri: http://ityouknow.com
-#        predicates:
-#        - After=2018-01-20T06:06:06+08:00[Asia/Shanghai]
-#        - Before=2018-01-20T06:06:06+08:00[Asia/Shanghai]
-#        - Between=2018-01-20T06:06:06+08:00[Asia/Shanghai], 2019-01-20T06:06:06+08:00[Asia/Shanghai]
-#      - id: cookie_route
-#        uri: http://ityouknow.com
-#        predicates:
-#        - Cookie=ityouknow, kee.e
+spring:
+  cloud:
+    gateway:
+      routes:
+        #        路径配置
+        ##        必须使用get方法请求，然后当两种条件同时存在时好像不能用
+        #        - id: neo_route
+        #          uri: http://www.baidu.com
+        #          predicates:
+        #            - Path=/aaa
+        #            - After=2018-07-20T06:06:06+08:00[Asia/Shanghai]
+        #        时间配置 after：时间之后才会跳转，before时间之前跳转，between两个时间之间
+        #        - id: time_route
+        #          uri: http://ityouknow.com
+        #          predicates:
+        #            - After=2020-01-20T06:06:06+08:00[Asia/Shanghai]
+        #        - Before=2018-01-20T06:06:06+08:00[Asia/Shanghai]
+        #        - Between=2018-01-20T06:06:06+08:00[Asia/Shanghai], 2019-01-20T06:06:06+08:00[Asia/Shanghai]
+        #      根据cookie路由，有对应cookie才会进行路由
+        - id: cookie_route
+          uri: http://ityouknow.com
+          predicates:
+            - Method=GET
+            - Cookie=ityouknow, kee.e
+            - After=2019-01-20T06:06:06+08:00[Asia/Shanghai]
+#        根据头部属性进行路由，头部属性值匹配正则
 #      - id: header_route
 #        uri: http://ityouknow.com
 #        predicates:
 #        - Header=X-Request-Id, \d+
+#      匹配host名称
 #      - id: host_route
 #        uri: http://ityouknow.com
 #        predicates:
 #        - Host=**.ityouknow.com
-#      - id: method_route
-#        uri: http://ityouknow.com
-#        predicates:
-#        - Method=GET
+#       匹配请求方法
+#        - id: method_route
+#          uri: http://ityouknow.com
+#          predicates:
+#            - Method=POST
+#       请求路径匹配
 #      - id: host_route
 #        uri: http://ityouknow.com
 #        predicates:
 #        - Path=/foo/{segment}
+#      请求参数匹配，这里是当keep = pu的时候匹配路由
 #      - id: query_route
 #        uri: http://ityouknow.com
 #        predicates:

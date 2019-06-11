@@ -1,0 +1,16 @@
+server:
+  port: 9071
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+  application:
+    name: cloud-gateway-eureka
+eureka:
+  client:
+    service-url:
+      default-url: http://lcoalhost:8080/eureka/
+logging:
+  level: info
