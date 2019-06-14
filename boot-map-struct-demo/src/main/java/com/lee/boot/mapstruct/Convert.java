@@ -14,11 +14,11 @@ import java.util.*;
  **/
 public class Convert {
     public static void main(String[] args) {
-        PersonDo2DtoMapping instance = PersonDo2DtoMapping.INSTANCE;
-        PersonDo personDo =
-                new PersonDo(1L, "zhige", "zhige.me@gmail.com", new Date(), new User(12, 185, 65.5));
-        PersonDto personDTO = instance.do2dto(personDo);
-        System.out.println(personDTO.toString());
+//        PersonDo2DtoMapping instance = PersonDo2DtoMapping.INSTANCE;
+//        PersonDo personDo =
+//                new PersonDo(1L, "zhige", "zhige.me@gmail.com", new Date(), new User(12, 185, 65.5));
+//        PersonDto personDTO = instance.do2dto(personDo);
+//        System.out.println(personDTO.toString());
 //        PersonDo person1 = instance.reserveDto(personDTO);
 //        System.out.println(person1);
 //        String format = DateFormatUtils.format(personDTO.getBirth(), "yyyy-MM-dd HH:mm:ss");

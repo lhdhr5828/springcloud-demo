@@ -15,12 +15,12 @@ import java.util.Set;
  * @Date 2019/6/3 13
  * @Description:
  **/
-@Mapper(uses = PersonTransRule.class)
+@Mapper(uses = PersonTransRule.class,componentModel = "spring")
 public interface PersonDo2DtoMapping {
     /**
      * 定义一个常量给调用者使用
      */
-    PersonDo2DtoMapping INSTANCE = Mappers.getMapper(PersonDo2DtoMapping.class);
+//    PersonDo2DtoMapping INSTANCE = Mappers.getMapper(PersonDo2DtoMapping.class);
 
     /**
      * dateformat 在Date对象转为字符串时指定格式

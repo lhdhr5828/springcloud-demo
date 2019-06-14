@@ -33,6 +33,7 @@
         <module>cloud-gateway-eureka</module>
         <module>boot-kafka-demo-server</module>
         <module>boot-map-struct-demo</module>
+        <module>boot-shiro-demo</module>
 
     </modules>
     <properties>
