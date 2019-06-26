@@ -32,6 +32,7 @@ public class MyRealm extends AuthorizingRealm {
 
     /**
      * 权限认证
+     *
      * @param principalCollection
      * @return
      */
@@ -40,6 +41,7 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println("————权限认证————");
 
         Subject subject = SecurityUtils.getSubject();
+        // 这里就是SimpleAuthenticationInfo实例化时的Principal
         User user = (User) subject.getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //获得该用户角色
@@ -51,6 +53,8 @@ public class MyRealm extends AuthorizingRealm {
         }
 //       设置该用户的角色
         info.setRoles(set);
+        // 设置字符串
+        info.setStringPermissions(new HashSet<>());
         return info;
     }
 
@@ -62,7 +66,7 @@ public class MyRealm extends AuthorizingRealm {
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken){
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) {
         System.out.println("————身份认证方法————");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 从数据库获取对应用户名密码的用户
@@ -71,7 +75,7 @@ public class MyRealm extends AuthorizingRealm {
         if (null == user) {
             return null;
         }
-
-        return new SimpleAuthenticationInfo(token.getUsername(), user.getPassword(), getName());
+        //
+        return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
     }
 }

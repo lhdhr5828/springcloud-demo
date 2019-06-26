@@ -1,6 +1,7 @@
 package com.lee.boot.mapstruct.mapper;
 
 import com.lee.boot.mapstruct.bean.PersonDo;
+
 import com.lee.boot.mapstruct.bean.User;
 import com.lee.boot.mapstruct.dto.PersonDto;
 import org.mapstruct.Mapper;
@@ -15,12 +16,12 @@ import java.util.Set;
  * @Date 2019/6/3 13
  * @Description:
  **/
-@Mapper(uses = PersonTransRule.class,componentModel = "spring")
+@Mapper(uses = PersonTransRule.class, componentModel = "spring")
 public interface PersonDo2DtoMapping {
     /**
      * 定义一个常量给调用者使用
      */
-//    PersonDo2DtoMapping INSTANCE = Mappers.getMapper(PersonDo2DtoMapping.class);
+    PersonDo2DtoMapping INSTANCE = Mappers.getMapper(PersonDo2DtoMapping.class);
 
     /**
      * dateformat 在Date对象转为字符串时指定格式
@@ -28,12 +29,10 @@ public interface PersonDo2DtoMapping {
      * @param personDo
      * @return
      */
-    //    @Mapping(source = "birthday", target = "birth")
-//            @Mapping(target = "birthExpressionFormat", expression = "java(org.apache.commons.lang3.time.DateFormatUtils.format(personDo.getBirthday(),\"yyyy-MM-dd HH:mm:ss\"))"),
     @Mapping(source = "birthday", target = "birth", dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Mapping(source = "user.age", target = "age")
     @Mapping(source = "email", target = "email")
-    @Mapping(source = "user.age",target = "adult")
+    @Mapping(source = "user.age", target = "adult")
     PersonDto do2dto(PersonDo personDo);
 
     /**

@@ -1,7 +1,6 @@
 package com.lee.boot.shiro.demo.config;
 
 import com.lee.boot.shiro.demo.realm.MyRealm;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -10,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+
 
 /**
  * @Author li.heng
@@ -31,18 +30,18 @@ public class ShiroConfig {
         System.out.println("初始化shiro的过滤器！！！！");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/visitor/login");
+        shiroFilterFactoryBean.setLoginUrl("/index/login");
         // 无权限时跳转的url
-        shiroFilterFactoryBean.setUnauthorizedUrl("/visitor/permission/error");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/index/permission/error");
 
 //        登录成功后的跳转
 //        shiroFilterFactoryBean.setSuccessUrl("/auth/success");
         // 设置拦截器
         LinkedHashMap<String, String> filterMap = new LinkedHashMap<>(16);
         // anon无需验证
-
+        filterMap.put("/index", "anon");
         // 无参，需要认证
-        filterMap.put("/*/index", "authc");
+        filterMap.put("/*", "authc");
 //        filterMap.put("/auth/*/*", "authc");
 //        filterMap.put("/auth/*", "authc");
 
@@ -58,7 +57,7 @@ public class ShiroConfig {
         // 表示请求必须为https安全请求
 //        filterMap.put("/aa", "ssl");
         // 参数可写多个，表示需要具有某个权限才可通过
-        filterMap.put("/auth/add", "roles[user]");
+        filterMap.put("/auth/user/*", "roles[user]");
 
         // 参数可写多个，表示需要某些角色才可通过
 //        filterMap.put("/ccc", "roles[\"admin，user\"]");
@@ -66,7 +65,7 @@ public class ShiroConfig {
         // perms 资源授权
 //        filterMap.put("/auth/add","perms[user:add]");
 //        filterMap.put("/**", "perms");
-        // 这些过key value中的value都在DefaultFilter中被定义，当加载shiro时会自动置为可用
+        //anon authc roles users 等都在DefaultFilter中被定义，当加载shiro时会自动置为可用
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
 

@@ -15,7 +15,7 @@ import java.util.List;
  * @Description:
  **/
 @Controller
-@RequestMapping(value = "/visitor")
+@RequestMapping(value = "/index")
 public class IndexController {
 
     @Autowired
@@ -25,14 +25,17 @@ public class IndexController {
     public String login() {
         return "login";
     }
+
     @RequestMapping(value = "/permission/error")
     @ResponseBody
-    public String noPermission(){
+    public String noPermission() {
         return "you have not permission !";
     }
 
     @RequestMapping(value = "/user/get")
-    public List<User> getUsers() {
+    @ResponseBody
+    public List<User> getUsers(int i) {
+        System.out.println(i);
         return userService.getAllUser();
     }
 

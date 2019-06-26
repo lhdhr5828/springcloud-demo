@@ -21,4 +21,8 @@ public interface UserService {
     User getUserByName(String username);
 
     List<Role> getRole(String username);
+
+    void insertUser(String name, String password);
+
+    void updateUser(Integer id, String name, String password);
 }

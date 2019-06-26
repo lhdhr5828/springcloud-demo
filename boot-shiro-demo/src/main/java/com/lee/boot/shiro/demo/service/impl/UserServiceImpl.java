@@ -51,4 +51,17 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.selectList(new QueryWrapper<>());
         return users;
     }
+
+    @Override
+    public void insertUser(String name, String password) {
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+        userMapper.insert(user);
+    }
+
+    @Override
+    public void updateUser(Integer id, String name, String password) {
+        userMapper.updateById(new User(id, name, password));
+    }
 }
