@@ -9,6 +9,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
@@ -30,22 +31,25 @@ public class MyRealm extends AuthorizingRealm {
     private UserService userService;
 
     /**
+     * 权限认证
      * @param principalCollection
      * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("————权限认证————");
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
+
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //获得该用户角色
-        List<Role> roles = userService.getRole(username);
+        List<Role> roles = userService.getRole(user.getName());
         Set<String> set = new HashSet<>();
-        //需要将 role 封装到 Set 作为 info.setRoles() 的参数
+//        //需要将 role 封装到 Set 作为 info.setRoles() 的参数
         for (Role role : roles) {
             set.add(role.getRoleName());
         }
-        //设置该用户拥有的角色
+//       设置该用户的角色
         info.setRoles(set);
         return info;
     }
@@ -58,17 +62,16 @@ public class MyRealm extends AuthorizingRealm {
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken){
         System.out.println("————身份认证方法————");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 从数据库获取对应用户名密码的用户
         User user = userService.getUserByName(token.getUsername());
-        String password = user.getPassword();
-        if (null == password) {
-            throw new AccountException("用户名不正确");
-        } else if (!password.equals(new String((char[]) token.getCredentials()))) {
-            throw new AccountException("密码不正确");
+
+        if (null == user) {
+            return null;
         }
-        return new SimpleAuthenticationInfo(token.getPrincipal(), password, getName());
+
+        return new SimpleAuthenticationInfo(token.getUsername(), user.getPassword(), getName());
     }
 }

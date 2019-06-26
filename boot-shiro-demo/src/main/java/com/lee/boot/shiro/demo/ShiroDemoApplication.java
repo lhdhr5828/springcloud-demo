@@ -1,16 +1,17 @@
-package com.lee.boot.mapstruct;
+package com.lee.boot.shiro.demo;
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @Author li.heng
- * @Date 2019/6/5 14
+ * @Date 2019/6/12 11
  * @Description:
  **/
 @SpringBootApplication
-public class MapStructDemoApplication {
+public class ShiroDemoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MapStructDemoApplication.class, args);
+        SpringApplication.run(ShiroDemoApplication.class);
     }
 }

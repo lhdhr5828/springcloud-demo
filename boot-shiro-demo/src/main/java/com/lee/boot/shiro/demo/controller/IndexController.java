@@ -5,7 +5,7 @@ import com.lee.boot.shiro.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -14,20 +14,21 @@ import java.util.List;
  * @Date 2019/6/13 15
  * @Description:
  **/
-@RestController
+@Controller
 @RequestMapping(value = "/visitor")
 public class IndexController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/index")
-    public String index() {
-        return "Here you are";
-    }
     @RequestMapping(value = "/login")
-    public String login(String username, String password) {
-        return "login success " + username + ":" + password;
+    public String login() {
+        return "login";
+    }
+    @RequestMapping(value = "/permission/error")
+    @ResponseBody
+    public String noPermission(){
+        return "you have not permission !";
     }
 
     @RequestMapping(value = "/user/get")
@@ -40,8 +41,4 @@ public class IndexController {
         return "login fail";
     }
 
-    @RequestMapping(value = "/permission/error")
-    public String noAuth() {
-        return "no auth";
-    }
 }
