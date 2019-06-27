@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/auth/add">添加</a>
+<a href="/auth/user/add/page">添加</a>
 <a href="/auth/update">修改</a>
 <div>
     <table>
@@ -13,11 +13,13 @@
             <th>id</th>
             <th>username</th>
             <th>password</th>
+            <th>添加权限</th>
         </tr>
         <tr th:each="user:${users}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.password}"></td>
+            <td> </td>
         </tr>
     </table>
 </div>

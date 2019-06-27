@@ -3,22 +3,19 @@ package com.lee.boot.shiro.demo.controller;
 import com.lee.boot.shiro.demo.entity.User;
 import com.lee.boot.shiro.demo.service.UserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.MessageFormat;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author li.heng
@@ -33,24 +30,27 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/index")
-    public String getMessage() {
-        return "index";
-    }
+    @Autowired
+    private HttpServletRequest request;
 
     @RequestMapping(value = "/user/get")
     public String getUsers(Model model) {
         List<User> allUser = userService.getAllUser();
 
         model.addAttribute("users", allUser);
-        return "user-manager";
+        return "user/user-manager";
+    }
+
+    @RequestMapping(value = "/user/add/page")
+    public String addUser() {
+        return "user/user-add";
     }
 
     @RequestMapping(value = "/user/add")
     public String addUser(String name, String password, Model model) {
         userService.insertUser(name, password);
         model.addAttribute("msg", "添加用户成功");
-        return "user-add";
+        return "user/user-add";
     }
 
     @RequestMapping(value = "/user/update")
@@ -58,26 +58,7 @@ public class AuthController {
         return "user-update";
     }
 
-    @RequestMapping(value = "/login")
-    public String login(String username, String password, Model model) {
-        System.out.printf("username:%s,password:%s%n", username, password);
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
-        try {
-            subject.login(usernamePasswordToken);
-        } catch (UnknownAccountException e) {
-            System.out.println(e.getMessage());
-            model.addAttribute("msg", "用户名未知");
-            return "login";
-        } catch (IncorrectCredentialsException i) {
-            model.addAttribute("msg", "密码错误");
-            return "login";
-        }
 
-        model.addAttribute("username", username);
-        model.addAttribute("password", password);
-        return "index";
-    }
 
 
     @RequestMapping(value = "/user/getAll")

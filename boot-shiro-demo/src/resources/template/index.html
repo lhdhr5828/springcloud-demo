@@ -7,8 +7,12 @@
 <body>
 <span>this is index page</span><br>
 <a href="/auth/user/get">查询用户</a>
-<a href="/auth/user/add">添加</a>
+<a href="/auth/user/add/page">添加</a>
 <a href="/auth/user/update">修改</a>
+<a href="/index/logout">退出</a>
 
+<em th:text="${mes}"></em>
+<p th:text="${username}"></p>
+<p th:text="${password}"></p>
 </body>
 </html>

@@ -30,23 +30,24 @@ public class ShiroConfig {
         System.out.println("初始化shiro的过滤器！！！！");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/index/login");
+        shiroFilterFactoryBean.setLoginUrl("/index/login/page");
         // 无权限时跳转的url
         shiroFilterFactoryBean.setUnauthorizedUrl("/index/permission/error");
 
 //        登录成功后的跳转
 //        shiroFilterFactoryBean.setSuccessUrl("/auth/success");
+
         // 设置拦截器
         LinkedHashMap<String, String> filterMap = new LinkedHashMap<>(16);
         // anon无需验证
-        filterMap.put("/index", "anon");
+        filterMap.put("/index/*", "anon");
         // 无参，需要认证
-        filterMap.put("/*", "authc");
+        filterMap.put("/auth/*", "authc");
 //        filterMap.put("/auth/*/*", "authc");
 //        filterMap.put("/auth/*", "authc");
 
         // 无参，注销，执行后会直接跳转到shiroFilterFactoryBean.setLoginUrl()
-//        filterMap.put("/logout", "logout");
+        filterMap.put("/index/logout", "logout");
 
         // authcBasic，无参，表示httpBasic认证
 //        filterMap.put("/eee", "authcBasic");
@@ -58,6 +59,7 @@ public class ShiroConfig {
 //        filterMap.put("/aa", "ssl");
         // 参数可写多个，表示需要具有某个权限才可通过
         filterMap.put("/auth/user/*", "roles[user]");
+        filterMap.put("/auth/user/*/*", "roles[user]");
 
         // 参数可写多个，表示需要某些角色才可通过
 //        filterMap.put("/ccc", "roles[\"admin，user\"]");
