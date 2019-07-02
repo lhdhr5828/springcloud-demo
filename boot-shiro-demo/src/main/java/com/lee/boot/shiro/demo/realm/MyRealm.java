@@ -32,6 +32,7 @@ public class MyRealm extends AuthorizingRealm {
 
     /**
      * 权限认证
+     * 验证身份已认证的用户的权限和角色
      *
      * @param principalCollection
      * @return
@@ -44,22 +45,23 @@ public class MyRealm extends AuthorizingRealm {
         // 这里就是SimpleAuthenticationInfo实例化时的Principal
         User user = (User) subject.getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        //获得该用户角色
+        // 获得该用户角色
         List<Role> roles = userService.getRole(user.getName());
         Set<String> set = new HashSet<>();
-//        //需要将 role 封装到 Set 作为 info.setRoles() 的参数
+        // 需要将 role 封装到 Set 作为 info.setRoles() 的参数
         for (Role role : roles) {
             set.add(role.getRoleName());
         }
-//       设置该用户的角色
+        // 设置该用户的角色
         info.setRoles(set);
-        // 设置字符串
+        // 设置权限字符串
         info.setStringPermissions(new HashSet<>());
         return info;
     }
 
     /**
      * 身份认证
+     * 验证数据库用户名和密码
      *
      * @param authenticationToken
      * @return

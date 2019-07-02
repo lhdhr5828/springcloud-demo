@@ -2,6 +2,11 @@ package com.lee.boot.shiro.demo.config;
 
 import com.lee.boot.shiro.demo.realm.MyRealm;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.SessionException;
+import org.apache.shiro.session.mgt.SessionContext;
+import org.apache.shiro.session.mgt.SessionKey;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,7 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager(@Autowired MyRealm realm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+//        securityManager.setSessionManager();
         securityManager.setRealm(realm);
         return securityManager;
     }
