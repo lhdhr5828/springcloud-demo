@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Welcome<br/>
+<input id="text" type="text"/>
+<button onclick="send()">Send</button>
+<button onclick="closeWebSocket()">Close</button>
+<div id="message">
+</div>
+<script>
+    var websocket = null;
+    if ('websocket' in window) {
+        websocket = new WebSocket("ws://localhost:9090/index");
+    } else {
+        alert('this is error');
+    }
+    websocket.onerror = function (event) {
+        alert('error');
+    }
+    websocket.onopen=function () {
+        console.log('ooooooooooooooooooopen')
+    };
+    websocket.onmessage = function (event) {
+        console.log(event.data);
+    }
+    websocket.onclose = function () {
+        alert('close');
+    }
+
+    //关闭连接
+    function closeWebSocket(){
+        websocket.close();
+    }
+    //发送消息
+    function send(){
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+</script>
+</body>
+</html>
