@@ -15,19 +15,22 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @Description: 端口与容器端口相同
  **/
 @Component
-@ServerEndpoint("/index")
+@ServerEndpoint("/index/{sid}")
 public class IndexEndpoint {
 
 
     private Session session;
 
-    private static CopyOnWriteArraySet<IndexEndpoint> set = new CopyOnWriteArraySet();
+    private String sid;
+    private static CopyOnWriteArraySet<IndexEndpoint> webSocketConnections = new CopyOnWriteArraySet();
 
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) {
+        System.out.println(sid);
         this.session = session;
-        set.add(this);
-        System.out.println(set.size());
+        this.sid = sid;
+        webSocketConnections.add(this);
+        System.out.println(webSocketConnections.size());
         System.out.println("有人来了！");
     }
 
@@ -54,6 +57,16 @@ public class IndexEndpoint {
             this.session.getBasicRemote().sendText(message);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void sendMessage(String message, @PathParam("sid") String sid) {
+        for (IndexEndpoint webSocketConnection : webSocketConnections) {
+            if (sid == null) {
+                webSocketConnection.sendMessage(message);
+            } else if (webSocketConnection.sid.equals(sid)) {
+                webSocketConnection.sendMessage(message);
+            }
         }
     }
 

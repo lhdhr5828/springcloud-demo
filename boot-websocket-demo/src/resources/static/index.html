@@ -13,15 +13,16 @@ Welcome<br/>
 </div>
 <script>
     var websocket = null;
+    var sid = Math.random() * 1000;
     if ('websocket' in window) {
-        websocket = new WebSocket("ws://localhost:9090/index");
+        websocket = new WebSocket("ws://localhost:9090/index/" + sid);
     } else {
         alert('this is error');
     }
     websocket.onerror = function (event) {
         alert('error');
     }
-    websocket.onopen=function () {
+    websocket.onopen = function () {
         console.log('ooooooooooooooooooopen')
     };
     websocket.onmessage = function (event) {
@@ -32,11 +33,12 @@ Welcome<br/>
     }
 
     //关闭连接
-    function closeWebSocket(){
+    function closeWebSocket() {
         websocket.close();
     }
+
     //发送消息
-    function send(){
+    function send() {
         var message = document.getElementById('text').value;
         websocket.send(message);
     }
