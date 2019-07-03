@@ -29,7 +29,7 @@ public class JwtUtils {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("username", username)
+                    .withClaim("name", username)
                     .build();
             DecodedJWT jwt = verifier.verify(token);
             return true;
@@ -65,7 +65,7 @@ public class JwtUtils {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             // 附带username信息
             return JWT.create()
-                    .withClaim("username", username)
+                    .withClaim("name", username)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {

@@ -1,20 +1,35 @@
 package com.lee.boot.jwt.demo.common.realm;
 
 import com.lee.boot.jwt.demo.common.JWTToken;
+import com.lee.boot.jwt.demo.config.JwtUtils;
+import com.lee.boot.jwt.demo.entity.Role;
+import com.lee.boot.jwt.demo.entity.User;
+import com.lee.boot.jwt.demo.service.RoleService;
+import com.lee.boot.jwt.demo.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author li.heng
  * @Date 2019/7/2 17
  * @Description:
  **/
+@Component
 public class ShiroRealm extends AuthorizingRealm {
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -30,7 +45,12 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        String name = JwtUtils.getUsername(principalCollection.toString());
+        User user = userService.selectByName(name);
+        Role role = roleService.selectByUserId(user.getId());
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addRole(role.getRoleName());
+        return simpleAuthorizationInfo;
     }
 
 
@@ -44,6 +64,19 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        return null;
+        String token = (String) authenticationToken.getPrincipal();
+        String username = JwtUtils.getUsername(token);
+        if (username == null) {
+            throw new AuthenticationException("token invalid");
+        }
+        User user = userService.selectByName(username);
+        if (user == null) {
+            throw new AuthenticationException("user not found");
+        }
+
+        if (JwtUtils.verify(token, username, user.getPassword())) {
+            return new SimpleAuthenticationInfo(token, token, "my_realm");
+        }
+        throw new AuthenticationException("authentication error");
     }
 }

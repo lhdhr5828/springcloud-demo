@@ -9,4 +9,5 @@ import com.lee.boot.jwt.demo.entity.Role;
  * @Description:
  **/
 public interface RoleService extends IService<Role> {
+    Role selectByUserId(Integer userId);
 }

@@ -18,7 +18,6 @@ public class Base64Utils {
      * @return
      */
     public static String strEncode(String str) {
-        Base64.Encoder encoder = Base64.getEncoder();
         byte[] bytes = null;
         try {
             bytes = str.getBytes("UTF-8");

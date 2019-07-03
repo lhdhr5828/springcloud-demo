@@ -2,6 +2,7 @@ package com.lee.boot.jwt.demo.controller;
 
 import com.lee.boot.jwt.demo.common.BaseResponse;
 import org.apache.shiro.ShiroException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class OperatorController {
 
     @RequestMapping(value = "/do")
+    @RequiresRoles("user")
     public BaseResponse doSomething(String str) {
         System.out.println(str);
-        throw new ShiroException("aaaaaaaaaa");
+        return new BaseResponse(true, "there is dongmei Ma ", null);
     }
 
     @RequestMapping(value = "/di")
+    @RequiresRoles("user")
     public String doother() {
         return "就他妈你叫夏洛啊？";
     }
