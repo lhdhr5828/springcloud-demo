@@ -1,8 +1,10 @@
-package com.lee.boot.jwt.demo.controller.Exception;
+package com.lee.boot.jwt.demo.common.Exception;
 
 import com.lee.boot.jwt.demo.common.BaseResponse;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,4 +36,11 @@ public class ExceptionController {
     public BaseResponse handleAccountError(UnknownAccountException e) {
         return new BaseResponse(false, e.getMessage(), null);
     }
+
+    @ExceptionHandler(UnauthenticatedException.class)
+    public BaseResponse handleAuthorizationException(UnauthenticatedException e) {
+        System.out.println(e.getMessage());
+        return new BaseResponse(false, "请联系管理员授权后,登陆操作", null);
+    }
+
 }
