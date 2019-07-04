@@ -36,6 +36,8 @@
         <module>boot-shiro-demo</module>
         <module>boot-jwt-shiro-demo</module>
         <module>boot-websocket-demo</module>
+        <module>boot-undertow-demo</module>
+        <module>boot-SpringSecurity-demo</module>
 
     </modules>
     <properties>
