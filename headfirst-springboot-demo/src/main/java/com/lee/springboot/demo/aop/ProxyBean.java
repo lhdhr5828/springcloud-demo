@@ -4,7 +4,6 @@ package com.lee.springboot.demo.aop;
 import org.springframework.cglib.proxy.InvocationHandler;
 import org.springframework.cglib.proxy.Proxy;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
@@ -22,7 +21,6 @@ public class ProxyBean implements InvocationHandler {
         ProxyBean proxyBean = new ProxyBean();
         proxyBean.target = target;
         proxyBean.interceptor = interceptor;
-
         Object o = Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), proxyBean);
         return o;
     }

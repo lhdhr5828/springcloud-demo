@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * @Author li.heng
  * @Date 2019/7/2 15
- * @Description:
+ * @Description: web异常处理
  **/
 @RestControllerAdvice
 public class ExceptionController {

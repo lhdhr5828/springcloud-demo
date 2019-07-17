@@ -2,7 +2,6 @@ package com.lee.springboot.demo.ioc;
 
 import com.lee.springboot.demo.bean.Animal;
 import com.lee.springboot.demo.bean.Cat;
-import com.lee.springboot.demo.bean.Dog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
