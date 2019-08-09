@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<script>
+    window.onload = a;
+
+    function a() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "http://localhost:8080/getHtml",
+            success: function (result) {
+                console.log(result)
+                // var arr = [];
+
+                // arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+                var elementById = document.getElementById("cccc");
+                console.log(elementById)
+                elementById
+                    .innerHTML = result.result;
+
+            }, error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+
+</script>
+<a href=""></a>
+<a href="doc.html#test" target="iframe1">aaa</a>
+<iframe src="doc.html" name="iframe1"></iframe>
+
+<iframe name="iframe2" id="cccc">
+
+</iframe>
+</body>
+</html>

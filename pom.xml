@@ -39,6 +39,7 @@
         <module>boot-undertow-demo</module>
         <module>boot-SpringSecurity-demo</module>
         <module>headfirst-springboot-demo</module>
+        <module>poi-doc-demo</module>
 
     </modules>
     <properties>
