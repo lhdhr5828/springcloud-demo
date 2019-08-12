@@ -106,7 +106,7 @@ public enum RegxRuleNinePointFour {
     private String regxName;
     private String regx;
 
-    private RegxRuleNinePointFour(String regxName, String regx) {
+     RegxRuleNinePointFour(String regxName, String regx) {
         this.regxName = regxName;
         this.regx = regx;
     }
