@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,5 +68,17 @@ public class UserController {
         return map;
     }
 
+    @RequestMapping("/convert")
+    @ResponseBody
+    public User convertRequest(User user) {
+        System.out.println(user.toString());
+        return user;
+    }
+
+    @RequestMapping("/convertList")
+    @ResponseBody
+    public void convertList(List<User> users) {
+        users.forEach(o -> System.out.println(o.toString()));
+    }
 
 }
