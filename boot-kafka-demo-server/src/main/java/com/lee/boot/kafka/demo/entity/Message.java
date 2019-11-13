@@ -1,5 +1,7 @@
 package com.lee.boot.kafka.demo.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -7,34 +9,19 @@ import java.util.Date;
  * @Date 2019/5/28 14
  * @Description:
  **/
+@Data
 public class Message {
-    private Long id;    //id
 
-    private String msg; //消息
+    private Long id;
+    /**
+     * 消息
+     */
+    private String msg;
 
-    private Date sendTime;  //时间戳
+    /**
+     * 时间戳
+     */
+    private Date sendTime;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Date getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(Date sendTime) {
-        this.sendTime = sendTime;
-    }
 }

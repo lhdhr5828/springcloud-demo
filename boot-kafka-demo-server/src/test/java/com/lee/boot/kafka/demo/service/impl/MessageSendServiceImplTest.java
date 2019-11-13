@@ -25,6 +25,6 @@ public class MessageSendServiceImplTest {
 
     @Test
     public void sendMessage() {
-        sendService.sendMessage();
+        sendService.sendMessage("message");
     }
 }

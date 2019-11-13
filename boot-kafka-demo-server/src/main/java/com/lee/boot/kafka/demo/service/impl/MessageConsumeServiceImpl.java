@@ -14,8 +14,9 @@ import java.util.Optional;
  * @Description:
  **/
 @Component
-public class MessageConsumeServiceImpl  {
-    @KafkaListener(topics = "test")
+public class MessageConsumeServiceImpl {
+
+    @KafkaListener(topics = {"test"},groupId = "kafka-1")
     public void consumeMessage(ConsumerRecord<?, ?> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         System.out.println("message consume！！！！");
         //判断是否NULL

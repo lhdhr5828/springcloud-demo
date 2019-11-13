@@ -30,25 +30,31 @@ public class MessageSendServiceImpl implements MessageSendService {
 
     @Autowired
     private KafkaTemplate<String, Object> template;
+    @Autowired
+    private MessageCallbackHandle messageCallbackHandle;
 
     @Override
-    public void sendMessage() {
+    public void sendMessage(String message) {
+        String result = "";
 //        Map map = new HashMap(16);
 //        map.put(KafkaHeaders.TOPIC, "test");
 //        map.put(KafkaHeaders.PARTITION_ID, 0);
 //        GenericMessage message = new GenericMessage("use Message to send message", new MessageHeaders(map));
 //        template.send(message);
-        ListenableFuture<SendResult<String, Object>> demo = template.send("test", "000000000000000");
+        ListenableFuture<SendResult<String, Object>> demo = template.send("test", message);
         demo.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
             @Override
             public void onFailure(Throwable throwable) {
                 System.out.println("message fail!!!!!!!!!!");
+                String s = messageCallbackHandle.failMessage(throwable);
+                throwable.printStackTrace();
             }
 
             @Override
             public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
                 System.out.println("message success!!!!!!!!!!");
                 System.out.println("-------------------------------------------------------------------------");
+                String s = messageCallbackHandle.successMessage(stringObjectSendResult);
             }
         });
     }

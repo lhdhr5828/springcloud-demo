@@ -6,5 +6,5 @@ package com.lee.boot.kafka.demo.service;
  * @Description:
  **/
 public interface MessageSendService {
-    void sendMessage();
+    void sendMessage(String message);
 }

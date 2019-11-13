@@ -4,24 +4,41 @@ spring:
   application:
     name: kafka-tutorial
   kafka:
-    bootstrap-servers: 172.16.47.34:9092
+    bootstrap-servers: 106.15.238.13:9092
     producer:
       retries: 0
-      # 每次批量发送消息的数量
+      # 每次批量发送消息的数量 ，如果设置的这个参数，那么producer会在消息数量达到批量的数量时才发送（不一定）
       batch-size: 16384
-      #  缓存容量
+#      #  缓存容量
       buffer-memory: 33554432
       # 指定消息key和消息体的编解码方式
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
     consumer:
       # 指定默认消费者group id
-      group-id: consumer-tutorial
-      auto-commit-interval: 100
-      auto-offset-reset: earliest
+      group-id: kafka-1
+      # 是否自动提交offset给kafka server，告诉server消息完成消费
       enable-auto-commit: true
-      # 指定消息key和消息体的编解码方式
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # auto-commit-interval: 100
+    # auto-offset-reset: earliest
+    # enable-auto-commit: true
+    # 指定消息key和消息体的编解码方式
+    # key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     # 指定listener 容器中的线程数，用于提高并发量
     listener:
       concurrency: 3
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 106.15.238.13:9092
+      bindings:
+        test_output:
+          destination: test
+#          contentType: application/json
+        test_input:
+          destination: test
+          group: stream-1
+      default-binder: kafka
+
+
